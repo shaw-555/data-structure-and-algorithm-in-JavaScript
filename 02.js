@@ -1,33 +1,79 @@
-var list = [1,2,3,4,5,6,7,8,9];
+function Stack() {
+    // to create a stack 
+    var items = [];
 
-var a = list.every((item) => {
-    return item>0;
-});
+    // to add a push method
+    this.push = function(element){
+        items.push(element);
+    }
+    
+    //to add a pop method
+    this.pop = function(){
+        return items.pop();
+    }
 
-var b =list.filter((x) => {
-    return x>4;
-});
+    // to add a peek method
+    this.peek = function(){
+        return items[items.length -1 ];
+    }
+    // to add a isEmpyt method
+    this.isEmpty = function(){
+        return items.length === 0;
+    }
+    // to add a size method
+    this.size = function(){
+        return items.length;
+    }
+    // to add a clear method
+    this.clear = function(){
+        items = [];
+    }
+    // to add a print method
+    this.print = function(){
+        console.log(items.toString());
+    }
+}
 
-var c = list.filter((x) => {
-    return x%2===1;
-});
+function divideBy2 (decNumber) {
+    var remStack = new Stack();
+        rem, 
+        binaryString = '';
+    
+    while(decNumber > 0){
+        rem = Math.floor(decNumber % 2);
+        remStack.push(rem);
+        decNumber = Math.floor( decNumber / 2);
+    }
 
-var d = list.some((x) => {
-    return x<0;
-});
-var newList = [];
-list.forEach((item) => {
-    newList.push(item);
-});
+    while(!remStack.isEmpty()){
+        binaryString += remStack.pop().toString();
+    }
+}
 
-var reduceResult = list.reduce(function(pre,cur,index){
-    return pre*cur;
-})
+function baseConverter (decNumber, base){
+    var remStack = new Stack(),
+        rem,
+        baseString = '',
+        digits = '0123456789ABCDEF';
 
-console.log(reduceResult);
+    while (decNumber > 0){
+        rem = Math.floor(decNumber % base);
+        remStack.push(rem);
+        decNumber = Math.floor(decNumber / base);
+        console.log(rem);
+        
+    }
+    
+    while (!remStack.isEmpty()){
+        var i = remStack.pop()
+        baseString += digits[remStack.pop()];
+        console.log('every i is'+ i);
+        
+    }
 
-console.log(list);
-console.log(newList);
+    
+    return baseString;
+}
 
-
-
+var c = baseConverter(10000,2);
+console.log('test1'+c);

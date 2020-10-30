@@ -1,19 +1,47 @@
-var weekDay = ['sun','mon','tus','wed','thu','fri','sat'];
-console.log(weekDay.length);
+function Stack() {
+    // to create a stack 
+    var items = [];
 
-for(var i = 0; i<weekDay.length; i++){
-    console.log(weekDay);
+    // to add a push method
+    this.push = function(element){
+        items.push(element);
+    }
     
-}
-// to add an element
-for(var i=weekDay.length; i>=0 ; i--){
-    weekDay[i] = weekDay[i-1];
-}
-weekDay[0]='eng';
+    //to add a pop method
+    this.pop = function(){
+        items.pop();
+    }
 
-// to delete an element
-for(var i =0; i<weekDay.length ; i++){
-    weekDay[i] = weekDay[i+1];
+    // to add a peek method
+    this.peek = function(){
+        return items[items.length -1 ];
+    }
+    // to add a isEmpyt method
+    this.isEmpty = function(){
+        return items.length === 0;
+    }
+    // to add a size method
+    this.size = function(){
+        return items.length;
+    }
+    // to add a clear method
+    this.clear = function(){
+        items = [];
+    }
+    // to add a print method
+    this.print = function(){
+        console.log(items.toString());
+    }
 }
 
-console.log(weekDay);
+var c = new Stack;
+c.push(1);
+c.push(2);
+c.push(3);
+c.push(4);
+c.print();
+c.pop();
+
+var peek = c.peek();
+console.log(peek);
+
