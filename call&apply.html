@@ -9,7 +9,7 @@
     
 </body>
 <script type="text/javascript">
-Function.prototype.myCall = function(content= window, ...args){
+Function.prototype.myApply = function(content= window, ...args){
     content = content ? Object(content): window;
     let func = this;
     let fn = Symbol("fn");
@@ -24,7 +24,7 @@ Function.prototype.myCall = function(content= window, ...args){
     return res;
 }
 
-Function.prototype.myApply = function(content,args){
+Function.prototype.myCall = function(content,args){
     // 如果有content，令其为对象；否则，令之为window
     content = content ? Object(content): window;
     // 谨记，this为函数
@@ -33,7 +33,7 @@ Function.prototype.myApply = function(content,args){
     let fn = Symbol("fn");
 
     content.fn = func;
-
+    // 先返回结果，结果为指向另一个变量，所以不会受到后面 delete content.fn 而影响
     let res = content.fn(args);
     // 删掉避免产生命名冲突
     delete content.fn;
